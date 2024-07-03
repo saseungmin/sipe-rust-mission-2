@@ -17,3 +17,37 @@ cargo run -- needle haystack
 
 벡터의 첫 번째 값이 `"target/debug/sipe-rust-mission-2"`, 즉 이 바이너리 파일의 이름   
 
+#### 인수 파서 추출
+
+```rust
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let (query, file_path) = parse_config(&args);
+
+    // --생략--
+}
+
+fn parse_config(args: &[String]) -> (&str, &str) {
+    let query = &args[1];
+    let file_path = &args[2];
+
+    (query, file_path)
+}
+```
+
+#### 설정 값 묶기
+
+```rust
+struct Config {
+    query: String,
+    file_path: String,
+}
+
+fn parse_config(args: &[String]) -> Config {
+    let query = args[1].clone();
+    let file_path = args[2].clone();
+
+    Config { query, file_path }
+}
+```
