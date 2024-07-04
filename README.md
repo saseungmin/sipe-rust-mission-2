@@ -212,3 +212,10 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 ```
 
 ![alt text](images/image-3.png)
+
+### 환경 변수 사용하기
+- 환경 변수 사용을 위한 함수는 표준 라이브러리의 env 모듈
+- 이 환경 변수의 값에 대해서는 고려하지 않고 그저 값이 설정되어 있는지 아닌지만 고려하므로, 여기서는 `unwrap`이나 `expect` 혹은 `Result`에서 사용했던 다른 메서드들 대신 `is_ok`를 사용
+
+![alt text](images/image-4.png)
+
