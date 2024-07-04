@@ -219,3 +219,34 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 
 ![alt text](images/image-4.png)
 
+
+### 표준 출력 대신 표준 에러로 에러 메시지 작성하기
+에러 출력시
+
+```bash
+cargo run > output.txt
+```
+
+main.rs 수정
+
+```rust
+let config = Config::build(&args).unwrap_or_else(|err| {
+    eprintln!("Problem parsing arguments: {err}");
+    process::exit(1)
+});
+
+if let Err(e) = run(config) {
+    eprintln!("Application error: {e}");
+    process::exit(1);
+}
+```
+
+표준 에러 스트림으로 출력하는 `eprintln!` 매크로를 제공   
+
+```bash
+cargo run -- to poem.txt > output.txt
+```
+
+터미널에는 아무런 출력을 볼 수 없고, `output.txt`에는 결과물이 담겨 있음   
+
+![alt text](images/image-5.png)
