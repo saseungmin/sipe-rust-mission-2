@@ -194,3 +194,21 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     // --생략--
 }
 ```
+
+### 테스트 주도 개발로 라이브러리 기능 개발하기
+
+#### run 함수에서 search 함수 사용하기
+
+```rust
+pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    let contents = fs::read_to_string(config.file_path)?;
+
+    for line in search(&config.query, &contents) {
+        println!("{line}");
+    }
+
+    Ok(())
+}
+```
+
+![alt text](images/image-3.png)
